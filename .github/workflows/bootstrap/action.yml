@@ -2,7 +2,7 @@ inputs:
   msg:
     default: ''
 
-jobs:
+runs:
   using: "composite"
   steps:
     - run: echo "${{ inputs.msg }}"
