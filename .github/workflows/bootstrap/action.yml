@@ -1,0 +1,9 @@
+inputs:
+  msg:
+    default: ''
+
+jobs:
+  using: "composite"
+  steps:
+    - run: echo "${{ inputs.msg }}"
+      shell: bash

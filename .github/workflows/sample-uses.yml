@@ -1,0 +1,38 @@
+name: Sample (uses-tmpl)
+on:
+  push:
+
+jobs:
+  sample-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bootstrap
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          action=.github/workflows/bootstrap/action.yml
+          mkdir -p $(dirname $action)
+          gh api -H "Accept: application/vnd.github.v3.raw" \
+            "repos/${{ github.repository }}/contents/$action?ref=${{ github.sha }}" > $action
+
+      - uses: ${{ github.repository }}/.github/workflows/bootstrap@main
+        with:
+          msg: foo
+
+  sample-hardcode:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bootstrap
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          action=.github/workflows/bootstrap/action.yml
+          mkdir -p $(dirname $action)
+          gh api -H "Accept: application/vnd.github.v3.raw" \
+            "repos/${{ github.repository }}/contents/$action?ref=${{ github.sha }}" > $action
+
+      - uses: tmm1/gha-repro-self-referential/.github/workflows/bootstrap@main
+        with:
+          msg: foo

@@ -1,0 +1,21 @@
+name: Sample (gh)
+on:
+  push:
+
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bootstrap
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          action=.github/workflows/bootstrap/action.yml
+          mkdir -p $(dirname $action)
+          gh api -H "Accept: application/vnd.github.v3.raw" \
+            "repos/${{ github.repository }}/contents/$action?ref=${{ github.sha }}" > $action
+
+      - uses: ./.github/workflows/bootstrap
+        with:
+          msg: foo
