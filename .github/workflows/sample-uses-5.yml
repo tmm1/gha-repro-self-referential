@@ -1,0 +1,11 @@
+name: Sample (uses-5)
+on:
+  push:
+
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tmm1/gha-repro-self-referential/.github/actions/bootstrap@main
+        with:
+          msg: foo
