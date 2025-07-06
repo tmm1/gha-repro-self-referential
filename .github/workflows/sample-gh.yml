@@ -26,4 +26,4 @@ jobs:
           set -x
           echo "Job name is $GITHUB_JOB"
           echo "Job ID is ${{ github.job }}"
-          echo "How about ${{ toJSON(github.jobs) }}"
+          echo "How about ${{ toJSON(github.workflow.jobs) }}"
