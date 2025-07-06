@@ -4,6 +4,7 @@ on:
 
 jobs:
   sample:
+    name: Sample Job
     runs-on: ubuntu-latest
     steps:
       - name: Bootstrap
@@ -19,3 +20,8 @@ jobs:
       - uses: ./.github/workflows/bootstrap
         with:
           msg: foo
+
+      - name: Get job name
+        run: |
+          echo "Job name is $GITHUB_JOB"
+          echo "How about ${{ github.jobs[github.job].name }}"
