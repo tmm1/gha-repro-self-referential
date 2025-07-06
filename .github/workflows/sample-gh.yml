@@ -23,5 +23,7 @@ jobs:
 
       - name: Get job name
         run: |
+          set -x
           echo "Job name is $GITHUB_JOB"
-          echo "How about ${{ github.jobs[github.job].name }}"
+          echo "Job ID is ${{ github.job }}"
+          echo "How about ${{ toJSON(github.jobs) }}"
